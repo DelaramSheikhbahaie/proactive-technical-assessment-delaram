@@ -1,0 +1,4 @@
+
+<template>
+    <OverviewPokemon/>
+</template>
