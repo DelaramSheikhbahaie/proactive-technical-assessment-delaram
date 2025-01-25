@@ -1,10 +1,11 @@
 <script setup lang="ts">
-   const data:any =  inject('characters')
-   
+   const props =  defineProps<{
+  data: any
+}>()
 </script>
 
 <template>
-    <div v-for="character in data">
+    <div v-for="character in props.data">
         {{ character.name }}
     </div>
 </template>
