@@ -3,10 +3,7 @@ import { pokemonUrl } from '~/constants';
 export const usePokemonStore = defineStore('pokemon', () => {
     const characters = ref([])
     const characterDetails = ref([])
-    // const doubleCount = computed(() => count.value * 2)
-    // function increment() {
-    //   count.value++
-    // }
+  
     const fetchCharacters = async () => {
         try {
           const response = await fetch(`${pokemonUrl}/ability`);
@@ -18,7 +15,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
         }
     };
 
-    const fetchCharacterDetails = async (url) => {
+    const fetchCharacterDetails = async (url:string) => {
         try {
           const response = await fetch(url);
           if (!response.ok) throw new Error('Failed to fetch data');
