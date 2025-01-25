@@ -1,4 +1,5 @@
 
 <template>
+    <ApplicationOverviewHeader/>
     <OverviewPokemon/>
 </template>

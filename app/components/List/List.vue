@@ -1,9 +1,10 @@
 <script setup lang="ts">
-defineProps<{ name: string }>();
+   const data:any =  inject('characters')
+   
 </script>
 
 <template>
-    <div>
-        list {{ name }}
+    <div v-for="character in data">
+        {{ character.name }}
     </div>
 </template>

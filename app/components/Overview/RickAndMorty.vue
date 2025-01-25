@@ -1,3 +1,3 @@
 <template>
-    <div>rick and morty</div>
+    <List name="rick and morty" />
 </template>
