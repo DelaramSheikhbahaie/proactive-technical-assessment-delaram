@@ -13,12 +13,12 @@ onMounted(()=>pokemonStore.fetchCharacters());
 <template>
    <DisplayList v-if="displayType === 'list'">
         <div v-for="character in characters">
-            <CardList :character="character" :detailsLink="`pokemon/details/${character.name}`" />
+            <CardList :character="character" :detailsLink="`pokemon/${character.name}`" />
         </div>
     </DisplayList>
     <DisplayGrid v-if="displayType === 'grid'">
         <div v-for="character in characters">
-            <CardGrid :character="character" :detailsLink="`pokemon/details/${character.name}`" />
+            <CardGrid :character="character" :detailsLink="`pokemon/${character.name}`" />
         </div>
     </DisplayGrid>
 </template>

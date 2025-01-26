@@ -4,9 +4,6 @@ const props = defineProps<{
     detailsLink: any
     selectCharacter?:any
 }>()
-const rickAndMortyStore = useRickAndMortyStore()
-
-const handler = () => props.selectCharacter(props.character)
 
 </script>
 <template>
@@ -17,7 +14,7 @@ const handler = () => props.selectCharacter(props.character)
             <p>{{ character.name }}</p>
         </div>
         <NuxtLink :to="detailsLink">
-            <UIcon name="i-material-symbols:arrow-circle-right-rounded" class="w-12 h-12 bg-pink-500" @click="handler" />
+            <UIcon name="i-material-symbols:arrow-circle-right-rounded" class="w-12 h-12 bg-pink-500" />
         </NuxtLink>
     </div>
 </template>

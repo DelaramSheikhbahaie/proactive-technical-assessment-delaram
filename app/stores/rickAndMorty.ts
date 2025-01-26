@@ -15,7 +15,7 @@ export const useRickAndMortyStore = defineStore('rickandmorty', () => {
         }
     };
 
-    const getCharacterDetails = async (id:any) => {
+    const fetchCharacterDetails = async (id:any) => {
       try {
         const response = await fetch(`${rickAndMortyUrl}/character/${id}`);
         if (!response.ok) throw new Error('Failed to fetch data');
@@ -26,5 +26,5 @@ export const useRickAndMortyStore = defineStore('rickandmorty', () => {
       }
     };
 
-    return { characters , fetchCharacters , getCharacterDetails , selectedCharacter}
+    return { characters , fetchCharacters , fetchCharacterDetails , selectedCharacter}
   })
