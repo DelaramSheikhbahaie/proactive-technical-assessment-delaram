@@ -1,8 +1,7 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'overview'
-})
+
 </script>
 <template>
+    <ApplicationOverviewHeader title="Pokemon" />
     <OverviewPokemon />
 </template>

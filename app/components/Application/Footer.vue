@@ -1,7 +1,5 @@
 <template>
-  <footer class="bg-zinc-100 border-t border-t-zinc-200 dark:bg-zinc-700 dark:border-t-zinc-600 py-8">
-    <UContainer>
-      Footer content
-    </UContainer>
+  <footer class="bg-purple-100 border-t border-t-purple-200 p-8">
+    <h1 class="text-black text-lg">Thank you for your attention</h1>
   </footer>
 </template>

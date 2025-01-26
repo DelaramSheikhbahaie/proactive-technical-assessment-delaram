@@ -10,11 +10,8 @@ onMounted(() => rickAndMortyStore.fetchCharacterDetails(router.currentRoute.valu
 </script>
 <template>
   <!-- <div class="text-black" v-if="selectedCharacter">loading...</div> -->
-  <UContainer
-    class="bg-purple-200 text-black w-5/6 p-8 flex justify-start items-center flex-col rounded-lg my-16 gap-8">
     <h1 class="text-4xl font-bold">{{ selectedCharacter.name }}</h1>
-    <NuxtImg :src="selectedCharacter.image" class="w-50 h-50 rounded-xl" />
+    <NuxtImg :src="selectedCharacter.image" class="w-32 h-32 rounded-xl" />
     <p class="text-xl">{{ selectedCharacter.status }} - {{ selectedCharacter.gender }} - {{ selectedCharacter.species }}
     </p>
-  </UContainer>
 </template>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'overview'
-})
 </script>
 <template>
+    <ApplicationOverviewHeader title="Rick and Morty" />
     <OverviewRickAndMorty/>
 </template>
