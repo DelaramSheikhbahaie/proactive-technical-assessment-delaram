@@ -2,7 +2,7 @@ import { rickAndMortyUrl } from '~/constants';
 
 export const useRickAndMortyStore = defineStore('rickandmorty', () => {
     const characters = ref([])
-    const characterDetails = ref([])
+    const selectedCharacter = ref([])
   
     const fetchCharacters = async () => {
         try {
@@ -15,16 +15,16 @@ export const useRickAndMortyStore = defineStore('rickandmorty', () => {
         }
     };
 
-    const fetchCharacterDetails = async (url:string) => {
-        try {
-          const response = await fetch(url);
-          if (!response.ok) throw new Error('Failed to fetch data');
-          const data = await response.json();
-          characterDetails.value = data.results; 
-        } catch (error) {
-            console.error('Error fetching Details:', error);
-        }
+    const getCharacterDetails = async (id:any) => {
+      try {
+        const response = await fetch(`${rickAndMortyUrl}/character/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const data = await response.json();
+        selectedCharacter.value = data; 
+      } catch (error) {
+          console.error('Error fetching details:', error);
+      }
     };
 
-    return { characters , fetchCharacters , fetchCharacterDetails , characterDetails}
+    return { characters , fetchCharacters , getCharacterDetails , selectedCharacter}
   })
