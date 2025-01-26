@@ -14,12 +14,12 @@ onMounted(() => rickAndMortyStore.fetchCharacters());
 <template>
     <DisplayList v-if="displayType === 'list'">
         <div v-for="character in characters">
-            <Card :character="character" :detailsLink="detailsLink" />
+            <CardList :character="character" :detailsLink="detailsLink" />
         </div>
     </DisplayList>
     <DisplayGrid v-if="displayType === 'grid'">
         <div v-for="character in characters">
-            <Card :character="character" :detailsLink="detailsLink" />
+            <CardGrid :character="character" :detailsLink="detailsLink" />
         </div>
     </DisplayGrid>
 </template>
