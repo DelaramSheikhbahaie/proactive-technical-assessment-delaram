@@ -1,30 +1,49 @@
 import { rickAndMortyUrl } from '~/constants';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import type { RickAndMortyCharactersType } from '~/constants/types';
+
+interface CharacterResponse {
+  results: RickAndMortyCharactersType[];
+}
 
 export const useRickAndMortyStore = defineStore('rickandmorty', () => {
-    const characters = ref([])
-    const selectedCharacter = ref([])
-  
-    const fetchCharacters = async () => {
-        try {
-          const response = await fetch(`${rickAndMortyUrl}/character`);
-          if (!response.ok) throw new Error('Failed to fetch data');
-          const data = await response.json();
-          characters.value = data.results; 
-        } catch (error) {
-            console.error('Error fetching characters:', error);
-        }
-    };
+  const characters = ref<RickAndMortyCharactersType[] | null>(null);
+  const characterDetails = ref<RickAndMortyCharactersType | null>(null);
 
-    const fetchCharacterDetails = async (id:any) => {
-      try {
-        const response = await fetch(`${rickAndMortyUrl}/character/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const data = await response.json();
-        selectedCharacter.value = data; 
-      } catch (error) {
-          console.error('Error fetching details:', error);
-      }
-    };
+  const emptyCharacterDetails = () => characterDetails.value = null;
+  const emptyCharacters = () => characters.value = null;
 
-    return { characters , fetchCharacters , fetchCharacterDetails , selectedCharacter}
-  })
+  const fetchCharacters = async () => {
+    emptyCharacters(); // Reset characters before fetching
+    try {
+      const response = await fetch(`${rickAndMortyUrl}/character`);
+      if (!response.ok) throw new Error('Failed to fetch data');
+      const data: CharacterResponse = await response.json();
+      characters.value = data.results;
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      emptyCharacters();
+    }
+  };
+
+  const fetchCharacterDetails = async (id: number | string) => {
+    emptyCharacterDetails(); // Reset character details before fetching
+    try {
+      const response = await fetch(`${rickAndMortyUrl}/character/${id}`);
+      if (!response.ok) throw new Error('Failed to fetch data');
+      const data: RickAndMortyCharactersType = await response.json();
+      characterDetails.value = data;
+    } catch (error) {
+      console.error('Error fetching character details:', error);
+      emptyCharacterDetails();
+    }
+  };
+
+  return {
+    characters,
+    characterDetails,
+    fetchCharacters,
+    fetchCharacterDetails,
+  };
+});
