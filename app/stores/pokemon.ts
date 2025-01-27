@@ -15,12 +15,12 @@ export const usePokemonStore = defineStore('pokemon', () => {
         }
     };
 
-    const fetchCharacterDetails = async (url:string) => {
+    const fetchCharacterDetails = async (name:string) => {
         try {
-          const response = await fetch(url);
+          const response = await fetch(`${pokemonUrl}/ability/${name}`);
           if (!response.ok) throw new Error('Failed to fetch data');
           const data = await response.json();
-          characterDetails.value = data.results; 
+          characterDetails.value = data; 
         } catch (error) {
             console.error('Error fetching Details:', error);
         }
