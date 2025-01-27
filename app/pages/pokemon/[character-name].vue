@@ -1,17 +1,40 @@
 <script setup lang="ts">
 import { usePokemonStore } from '~/stores/pokemon';
-const router: any = useRouter()
-const pokemonStore = usePokemonStore()
-const { characterDetails }: any = storeToRefs(pokemonStore)
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
-onMounted(() => pokemonStore.fetchCharacterDetails(router.currentRoute.value.params.charactername));
+const pokemonStore = usePokemonStore();
+const { characterDetails }:any = storeToRefs(pokemonStore);
+const router :any = useRouter();
+
+onMounted(() => {
+  const characterName = router.currentRoute.value.params?.charactername;
+  if (characterName) {
+    pokemonStore.fetchCharacterDetails(characterName as string);
+  }
+});
 </script>
+
 <template>
-    <h1 class="text-4xl font-bold">{{ characterDetails.name }}</h1>
-    <div class="flex flex-row justify-start">
-        <NuxtImg src="/images/default-avatar.jpg" class="w-1/5 mr-16 rounded-xl" />
-        <div class="flex flex-col gap-10">
-            <p class="text-xl">generation: <strong>{{ characterDetails.generation.name }}</strong></p>
-        </div>
+  <div>
+    <div v-if="characterDetails === null">
+        <Loader/>
     </div>
+    <div v-else>
+      <h1 class="text-4xl font-bold mb-8">{{ characterDetails.name }}</h1>
+      <div class="flex flex-row justify-start">
+        <NuxtImg
+          src="/images/default-avatar.jpg"
+          class="w-1/5 mr-16 rounded-xl"
+          alt="Character Avatar"
+        />
+        <div class="flex flex-col gap-10">
+          <p class="text-xl">
+            Generation: <strong>{{ characterDetails.generation.name }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
