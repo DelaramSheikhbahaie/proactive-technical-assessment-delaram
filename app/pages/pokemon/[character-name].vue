@@ -2,7 +2,6 @@
 import { usePokemonStore } from '~/stores/pokemon';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
 
 const pokemonStore = usePokemonStore();
 const { characterDetails, isLoading }: any = storeToRefs(pokemonStore);

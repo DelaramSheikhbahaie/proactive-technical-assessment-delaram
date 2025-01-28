@@ -21,6 +21,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
   };
 
   const setIsLoading = (status:boolean) =>  isLoading.value = status;
+  
   const handleError = (error: unknown, message: string) => {
     console.error('API Error:', message, error);
   };

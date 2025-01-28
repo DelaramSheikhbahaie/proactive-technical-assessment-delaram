@@ -2,34 +2,30 @@
 import { useRickAndMortyStore } from '~/stores/rickAndMorty';
 import { useOverviewStore } from '~/stores/overview';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
 
 const overviewStore = useOverviewStore();
 const rickAndMortyStore = useRickAndMortyStore();
 
 const { displayType } = storeToRefs(overviewStore);
-const { characters } = storeToRefs(rickAndMortyStore);
+const { characters, isLoading } = storeToRefs(rickAndMortyStore);
 
-onMounted(() => {
-  rickAndMortyStore.fetchCharacters();
-});
+rickAndMortyStore.fetchCharacters();
 </script>
 
 <template>
-  <div v-if="!characters">
+  <div v-if="isLoading">
     <Loader />
   </div>
-
-  <div v-else>
+  <div>
     <DisplayList v-if="displayType === 'list' && characters">
-        <div v-for="character in characters" :key="character.id">
+      <div v-for="character in characters" :key="character.id">
         <CardList :character="character" :detailsLink="`rickandmorty/${character.id}`" />
-        </div>
+      </div>
     </DisplayList>
     <DisplayGrid v-if="displayType === 'grid' && characters">
-        <div v-for="character in characters" :key="character.id">
+      <div v-for="character in characters" :key="character.id">
         <CardGrid :character="character" :detailsLink="`rickandmorty/${character.id}`" />
-        </div>
+      </div>
     </DisplayGrid>
-</div>
+  </div>
 </template>

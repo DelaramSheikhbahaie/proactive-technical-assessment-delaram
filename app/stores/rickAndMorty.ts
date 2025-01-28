@@ -1,4 +1,3 @@
-import { rickAndMortyUrl } from '~/constants';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { RickAndMortyCharactersType } from '~/constants/types';
@@ -10,33 +9,47 @@ interface CharacterResponse {
 export const useRickAndMortyStore = defineStore('rickandmorty', () => {
   const characters = ref<RickAndMortyCharactersType[] | null>(null);
   const characterDetails = ref<RickAndMortyCharactersType | null>(null);
+  const isLoading = ref(false);
 
-  const emptyCharacterDetails = () => characterDetails.value = null;
-  const emptyCharacters = () => characters.value = null;
+  const clearCharacters = () => {
+    characters.value = null;
+  };
+
+  const clearCharacterDetails = () => {
+    characterDetails.value = null;
+  };
+
+  const setIsLoading = (status:boolean) =>  isLoading.value = status;
+  
+  const handleError = (error: unknown, message: string) => {
+    console.error('API Error:', message, error);
+  };
 
   const fetchCharacters = async () => {
-    emptyCharacters(); // Reset characters before fetching
+    clearCharacters()
+    setIsLoading(true)
+
     try {
-      const response = await fetch(`${rickAndMortyUrl}/character`);
-      if (!response.ok) throw new Error('Failed to fetch data');
-      const data: CharacterResponse = await response.json();
-      characters.value = data.results;
+      const { data } = await useRickAndMortyData<CharacterResponse>('/character');
+      characters.value = data.value?.results || [];
     } catch (error) {
-      console.error('Error fetching characters:', error);
-      emptyCharacters();
+      handleError(error, 'cannot fetch characters');
+    } finally {
+      setIsLoading(false)
     }
   };
 
   const fetchCharacterDetails = async (id: number | string) => {
-    emptyCharacterDetails(); // Reset character details before fetching
+    clearCharacterDetails()
+    setIsLoading(true)
+    
     try {
-      const response = await fetch(`${rickAndMortyUrl}/character/${id}`);
-      if (!response.ok) throw new Error('Failed to fetch data');
-      const data: RickAndMortyCharactersType = await response.json();
-      characterDetails.value = data;
+      const { data } = await useRickAndMortyData<RickAndMortyCharactersType>(`/character/${id}`);
+      characterDetails.value = data.value || null;
     } catch (error) {
-      console.error('Error fetching character details:', error);
-      emptyCharacterDetails();
+      handleError(error, 'cannot fetch character details');
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -45,5 +58,6 @@ export const useRickAndMortyStore = defineStore('rickandmorty', () => {
     characterDetails,
     fetchCharacters,
     fetchCharacterDetails,
+    isLoading
   };
 });
