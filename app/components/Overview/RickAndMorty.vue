@@ -4,19 +4,21 @@ import { useOverviewStore } from '~/stores/overview';
 import { storeToRefs } from 'pinia';
 
 const overviewStore = useOverviewStore();
-const rickAndMortyStore = useRickAndMortyStore();
-
 const { displayType } = storeToRefs(overviewStore);
-const { characters, isLoading } = storeToRefs(rickAndMortyStore);
 
-rickAndMortyStore.fetchCharacters();
+const rickAndMortyStore = useRickAndMortyStore();
+const { isLoading }: any = storeToRefs(rickAndMortyStore);
+const { data: characters } = useAsyncData('fetchCharacters', async () => {
+  await rickAndMortyStore.fetchCharacters();
+  return rickAndMortyStore.characters;
+});
 </script>
 
 <template>
   <div v-if="isLoading">
     <Loader />
   </div>
-  <div>
+  <div v-else-if="characters">
     <DisplayList v-if="displayType === 'list' && characters">
       <div v-for="character in characters" :key="character.id">
         <CardList :character="character" :detailsLink="`rickandmorty/${character.id}`" />

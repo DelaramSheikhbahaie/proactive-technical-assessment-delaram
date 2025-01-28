@@ -2,15 +2,16 @@
 import { usePokemonStore } from '~/stores/pokemon';
 import { useOverviewStore } from '~/stores/overview';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
 
 const overviewStore = useOverviewStore();
-const pokemonStore = usePokemonStore();
-
 const { displayType } = storeToRefs(overviewStore);
-const { characters, isLoading }: any = storeToRefs(pokemonStore);
-pokemonStore.fetchCharacters();
 
+const pokemonStore = usePokemonStore();
+const { isLoading }: any = storeToRefs(pokemonStore);
+const { data: characters } = useAsyncData('fetchCharacters', async () => {
+  await pokemonStore.fetchCharacters();
+  return pokemonStore.characters;
+});
 </script>
 
 <template>
@@ -18,7 +19,7 @@ pokemonStore.fetchCharacters();
     <Loader />
   </div>
 
-  <div>
+  <div v-else-if="characters">
     <DisplayList v-if="displayType === 'list'">
       <div v-for="(character, index) in characters" :key="index">
         <CardList :character="character" :detailsLink="`pokemon/${character.name}`" />
