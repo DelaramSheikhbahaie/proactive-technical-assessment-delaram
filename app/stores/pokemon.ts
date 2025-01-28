@@ -1,4 +1,3 @@
-import { pokemonUrl } from '~/constants';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { PokemonCharactersType } from '~/constants/types';
@@ -11,41 +10,55 @@ interface CharacterResponse {
 export const usePokemonStore = defineStore('pokemon', () => {
   const characters = ref<PokemonCharactersType[] | null>(null);
   const characterDetails = ref<any | null>(null);
+  const isLoading = ref(false);
 
-  const emptyCharacterDetails = () =>  characterDetails.value = null;
-  const emptyCharacters = () =>  characters.value = null;
+  const clearCharacters = () => {
+    characters.value = null;
+  };
+
+  const clearCharacterDetails = () => {
+    characterDetails.value = null;
+  };
+
+  const setIsLoading = (status:boolean) =>  isLoading.value = status;
+  const handleError = (error: unknown, message: string) => {
+    console.error('API Error:', message, error);
+  };
 
   const fetchCharacters = async () => {
-    emptyCharacters()
+    clearCharacters()
+    setIsLoading(true)
+
     try {
-      const response = await fetch(`${pokemonUrl}/ability`);
-      if (!response.ok) throw new Error('Failed to fetch characters');
-      const data:CharacterResponse = await response.json();
-      characters.value = data.results;
+      const { data } = await usePokemonData<CharacterResponse>('/ability');
+      characters.value = data.value?.results || [];
     } catch (error) {
-      console.error('Error fetching characters:', error);
-      emptyCharacters()
+      handleError(error, 'cannot fetch characters');
+    } finally {
+      setIsLoading(false)
     }
   };
 
 
   const fetchCharacterDetails = async (name: string) => {
-    emptyCharacterDetails()
+    clearCharacterDetails()
+    setIsLoading(true)
+    
     try {
-      const response = await fetch(`${pokemonUrl}/ability/${name}`);
-      if (!response.ok) throw new Error('Failed to fetch character details');
-      const data:any = await response.json();
-      characterDetails.value = data;
+      const { data } = await usePokemonData<Record<string, any>>(`/ability/${name}`);
+      characterDetails.value = data.value || null;
     } catch (error) {
-      console.error('Error fetching character details:', error);
-      emptyCharacterDetails()
+      handleError(error, 'cannot fetch character details');
+    } finally {
+      setIsLoading(false)
     }
   };
 
-  return { 
-    characters, 
-    fetchCharacters, 
-    fetchCharacterDetails, 
-    characterDetails 
+  return {
+    characters,
+    characterDetails,
+    fetchCharacters,
+    fetchCharacterDetails,
+    isLoading
   };
 });

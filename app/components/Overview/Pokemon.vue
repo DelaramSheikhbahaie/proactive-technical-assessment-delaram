@@ -8,19 +8,17 @@ const overviewStore = useOverviewStore();
 const pokemonStore = usePokemonStore();
 
 const { displayType } = storeToRefs(overviewStore);
-const { characters }:any = storeToRefs(pokemonStore);
+const { characters, isLoading }: any = storeToRefs(pokemonStore);
+pokemonStore.fetchCharacters();
 
-onMounted(() => {
-  pokemonStore.fetchCharacters();
-});
 </script>
 
 <template>
-  <div v-if="characters === null">
+  <div v-if="isLoading">
     <Loader />
   </div>
-  
-  <div v-else>
+
+  <div>
     <DisplayList v-if="displayType === 'list'">
       <div v-for="(character, index) in characters" :key="index">
         <CardList :character="character" :detailsLink="`pokemon/${character.name}`" />
