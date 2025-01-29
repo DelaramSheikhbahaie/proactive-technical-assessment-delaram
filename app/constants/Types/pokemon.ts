@@ -14,13 +14,13 @@ interface VersionGroup {
     url: string;
 }
 
-interface EffectEntry {
+export interface EffectEntry {
     effect: string;
     language: Language;
     short_effect?: string;
 }
 
-interface EffectChange {
+export interface EffectChange {
     effect_entries: EffectEntry[];
     version_group: VersionGroup;
 }
