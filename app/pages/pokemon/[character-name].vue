@@ -6,7 +6,7 @@ const router: any = useRouter();
 const characterName = router.currentRoute.value.params?.charactername;
 
 const pokemonStore = usePokemonStore();
-const { isLoading }: any = storeToRefs(pokemonStore);
+const { isLoading } = storeToRefs(pokemonStore);
 const { data: characterDetails } = useAsyncData('fetchCharacterDetails', async () => {
   if (characterName)
     await pokemonStore.fetchCharacterDetails(characterName as string);

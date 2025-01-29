@@ -7,7 +7,7 @@ const overviewStore = useOverviewStore();
 const { displayType } = storeToRefs(overviewStore);
 
 const pokemonStore = usePokemonStore();
-const { isLoading }: any = storeToRefs(pokemonStore);
+const { isLoading } = storeToRefs(pokemonStore);
 const { data: characters } = useAsyncData('fetchCharacters', async () => {
   await pokemonStore.fetchCharacters();
   return pokemonStore.characters;

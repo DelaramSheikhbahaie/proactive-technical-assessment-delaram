@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { RickAndMortyCharactersType } from '~/constants/types';
+import type { RickAndMortyCharactersType } from '~/constants/Types/rickandmorty.js';
 
 interface CharacterResponse {
   results: RickAndMortyCharactersType[];

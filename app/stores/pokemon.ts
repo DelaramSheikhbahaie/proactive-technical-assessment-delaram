@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { PokemonCharactersType } from '~/constants/types';
+import type { PokemonCharactersType ,PokemonAbilityDetails } from '~/constants/Types/pokemon.js';
 
 interface CharacterResponse {
   results: PokemonCharactersType[];
@@ -9,7 +9,7 @@ interface CharacterResponse {
 
 export const usePokemonStore = defineStore('pokemon', () => {
   const characters = ref<PokemonCharactersType[] | null>(null);
-  const characterDetails = ref<any | null>(null);
+  const characterDetails = ref<PokemonAbilityDetails | null>(null);
   const isLoading = ref(false);
 
   const clearCharacters = () => {
@@ -46,7 +46,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
     setIsLoading(true)
     
     try {
-      const { data } = await usePokemonData<Record<string, any>>(`/ability/${name}`);
+      const { data } = await usePokemonData<PokemonAbilityDetails>(`/ability/${name}`);
       characterDetails.value = data.value || null;
     } catch (error) {
       handleError(error, 'cannot fetch character details');

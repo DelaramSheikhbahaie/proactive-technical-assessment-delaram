@@ -2,11 +2,11 @@
 import { useRickAndMortyStore } from '~/stores/rickAndMorty';
 import { useRouter } from 'vue-router';
 
-const router: any = useRouter();
+const router:any = useRouter();
 const characterId = router.currentRoute.value.params.id;
 
 const rickAndMortyStore = useRickAndMortyStore();
-const { isLoading }: any = storeToRefs(rickAndMortyStore);
+const { isLoading } = storeToRefs(rickAndMortyStore);
 const { data: characterDetails } = useAsyncData('fetchCharacterDetails', async () => {
   if (characterId)
     await rickAndMortyStore.fetchCharacterDetails(characterId as number);

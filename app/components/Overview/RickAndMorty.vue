@@ -7,7 +7,7 @@ const overviewStore = useOverviewStore();
 const { displayType } = storeToRefs(overviewStore);
 
 const rickAndMortyStore = useRickAndMortyStore();
-const { isLoading }: any = storeToRefs(rickAndMortyStore);
+const { isLoading } = storeToRefs(rickAndMortyStore);
 const { data: characters } = useAsyncData('fetchCharacters', async () => {
   await rickAndMortyStore.fetchCharacters();
   return rickAndMortyStore.characters;

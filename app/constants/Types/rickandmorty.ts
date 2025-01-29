@@ -1,8 +1,3 @@
-export interface PokemonCharactersType  {
-    name:string
-    url:string
-}
-
 export interface RickAndMortyCharactersType  {
     id: number
     name: string
