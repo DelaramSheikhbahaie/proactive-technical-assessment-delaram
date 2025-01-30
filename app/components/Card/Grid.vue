@@ -11,7 +11,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="w-full h-80 bg-white p-4 my-2 flex flex-col items-start justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow">
+  <div class="w-full bg-white p-4 my-2 flex flex-col items-start justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow">
     <NuxtImg
       :src="character.image || '/images/default-avatar.jpg'"
       alt="Character avatar"
