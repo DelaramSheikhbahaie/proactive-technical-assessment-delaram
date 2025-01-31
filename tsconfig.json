@@ -1,6 +1,9 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "types": ["nuxt-api-party"]
+    "types": [
+      "nuxt-api-party",  
+      "vitest/globals"
+    ]
   }
 }

@@ -13,6 +13,5 @@ describe('Overview Store', () => {
     overviewStore.changeDisplay('grid')
 
     expect(overviewStore.displayType).toBe('grid')
-
   })
 })
