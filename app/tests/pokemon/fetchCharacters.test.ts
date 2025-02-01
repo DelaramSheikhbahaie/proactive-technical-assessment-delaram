@@ -43,28 +43,7 @@ describe('usePokemonStore', () => {
     const store = usePokemonStore();
     await store.fetchCharacters();
     expect(store.characters).toEqual(mockCharacters.results);
+    expect(store.isLoading).toEqual(false);
     vi.unmock("usePokemonData")
   });
-
-  // it('should handle errors when fetching Pokémon characters', async () => {
-  //   // Mock `useApi` to reject with an error
-  //   // (useApi as vi.Mock).mockRejectedValueOnce(new Error('API Error'));
-
-  //   const store = usePokemonStore();
-  //   await store.fetchCharacters();
-
-  //   expect(store.characters).toBeNull(); // State should remain null
-  //   expect(store.isLoading).toBe(false); // Loading state should be reset
-  // });
-
-  // it('should handle errors when fetching Pokémon details', async () => {
-  //   // Mock `useApi` to reject with an error
-  //   // (useApi as vi.Mock).mockRejectedValueOnce(new Error('API Error'));
-
-  //   const store = usePokemonStore();
-  //   await store.fetchCharacterDetails('bulbasaur');
-
-  //   expect(store.characterDetails).toBeNull(); // State should remain null
-  //   expect(store.isLoading).toBe(false); // Loading state should be reset
-  // });
 });

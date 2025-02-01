@@ -85,6 +85,7 @@ describe('useRickAndMortyStore', () => {
     const store = useRickAndMortyStore();
     await store.fetchCharacters();
     expect(store.characters).toEqual(mockCharacters.results);
+    expect(store.isLoading).toEqual(false);
     vi.unmock("useRickAndMortyData")
   });
 });

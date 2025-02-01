@@ -43,5 +43,6 @@ describe('usePokemonStore', () => {
     await store.fetchCharacterDetails('bulbasaur');
 
     expect(store.characterDetails).toEqual(mockDetails);
+    expect(store.isLoading).toEqual(false);
   });
 });
