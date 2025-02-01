@@ -3,22 +3,21 @@ import { usePokemonStore } from '~/stores/pokemon';
 import { useRouter } from 'vue-router';
 import type { EffectChange, EffectEntry } from '~/constants/Types/pokemon';
 
-const isHydrating = ref(true); // Track hydration phase
-
 const router: any = useRouter();
 const characterName = router.currentRoute.value.params?.charactername;
+const isHydrating = ref<boolean>(true);
 
 const pokemonStore = usePokemonStore();
 const { isLoading } = storeToRefs(pokemonStore);
-const { data: characterDetails } = useAsyncData('fetchCharacterDetails', async () => {
+const { data: characterDetails} = useAsyncData('fetchCharacterDetails', async () => {
   if (characterName)
     await pokemonStore.fetchCharacterDetails(characterName as string);
   return pokemonStore.characterDetails;
 });
 
-const englishEffectChanges = computed(() => {
-  if (!characterDetails.value) return [];
 
+const englishEffectChanges = computed<EffectEntry[]>(() => {
+  if (!characterDetails.value) return [];
   return characterDetails.value.effect_changes
     .flatMap((effectChange: EffectChange) =>
       effectChange.effect_entries.filter((entry: EffectEntry) => entry.language.name === 'en')
@@ -29,7 +28,7 @@ const englishEffectEntries = computed(() => {
   if (!characterDetails.value) return [];
   return characterDetails.value.effect_entries.filter((entry: EffectEntry) => entry.language.name === 'en')
 });
-const showNoInformation = computed(() => {
+const showNoInformation = computed<boolean>(() => {
   return !isLoading.value && !characterDetails.value;
 });
 
@@ -65,8 +64,3 @@ onMounted(() => {
     <strong v-else-if="showNoInformation">No Information</strong>
   </div>
 </template>
-<style>
-[v-cloak] {
-  display: none;
-}
-</style>

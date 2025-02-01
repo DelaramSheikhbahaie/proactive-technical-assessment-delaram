@@ -2,10 +2,10 @@
 import { useRickAndMortyStore } from '~/stores/rickAndMorty';
 import { useRouter } from 'vue-router';
 
-const isHydrating = ref(true); // Track hydration phase
 
-const router:any = useRouter();
+const router: any = useRouter();
 const characterId = router.currentRoute.value.params.id;
+const isHydrating = ref<boolean>(true);
 
 const rickAndMortyStore = useRickAndMortyStore();
 const { isLoading } = storeToRefs(rickAndMortyStore);
