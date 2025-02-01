@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   to: string
   label: string
 }>()
 </script>
 
 <template>
-  <UButton :to="props.to" :label="props.label" variant="link" color="pink" />
+  <UButton :to="to" :label="label" variant="link" color="pink"/>
 </template>
