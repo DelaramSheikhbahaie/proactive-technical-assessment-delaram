@@ -1,7 +1,7 @@
 import { setActivePinia, createPinia } from 'pinia';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { vi } from 'vitest';
-import { usePokemonStore } from '../stores/pokemon.js';
+import { usePokemonStore } from '../../stores/pokemon.js';
 
 
 describe('usePokemonStore', () => {
