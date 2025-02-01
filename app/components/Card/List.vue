@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { NuxtImg, NuxtLink } from '#components'; // Auto-import or explicitly import components as needed
+import { DEFAULT_AVATAR } from '../../constants/index.js'
 
-const props = defineProps<{
+defineProps<{
   character: {
     name: string;
     image?: string | null;
@@ -14,11 +14,8 @@ const props = defineProps<{
   <div
     class="w-full bg-white p-4 my-2 flex flex-row items-center justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer">
     <div class="flex flex-row items-center">
-      <NuxtImg
-        :src="character.image || '/images/default-avatar.jpg'"
-        alt="Character avatar"
-        class="w-24 h-24 mr-8 rounded-lg object-cover"
-      />
+      <NuxtImg :src="character.image || DEFAULT_AVATAR" alt="Character avatar"
+        class="w-24 h-24 mr-8 rounded-lg object-cover" />
       <p class="text-lg font-semibold">{{ character.name }}</p>
     </div>
     <NuxtLink :to="detailsLink" class="text-pink-500">
