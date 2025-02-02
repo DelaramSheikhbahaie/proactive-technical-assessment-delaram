@@ -42,5 +42,8 @@
   },
   "resolutions": {
     "@typescript-eslint/utils": "^8.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }

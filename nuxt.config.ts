@@ -1,5 +1,6 @@
 import { pwa } from './app/config/pwa'
 import { appDescription } from './app/constants/index'
+import 'dotenv/config';
 
 export default defineNuxtConfig({
   modules: [
@@ -70,10 +71,10 @@ export default defineNuxtConfig({
   apiParty: {
     endpoints: {
       pokemon: {
-        url: 'https://pokeapi.co/api/v2',
+        url: process.env.POKEMON_API_URL || 'https://pokeapi.co/api/v2',
       },
       rickAndMorty: {
-        url: 'https://rickandmortyapi.com/api',
+        url: process.env.RICKANDMORTY_API_URL || 'https://rickandmortyapi.com/api',
       },
     },
   },
