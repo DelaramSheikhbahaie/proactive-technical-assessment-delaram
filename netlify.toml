@@ -6,6 +6,11 @@ command = "pnpm run build"
 NODE_VERSION = "20"
 
 [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/api/__api_party/rickAndMorty/:splat"
   to = "https://rickandmortyapi.com/api/:splat"
   status = 200
