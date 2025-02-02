@@ -12,7 +12,7 @@ defineProps<{
 
 <template>
   <div
-    class="w-full bg-white p-4 my-2 flex flex-row items-center justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+    class="w-full bg-white p-4 my-2 flex flex-row items-center justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow">
     <div class="flex flex-row items-center">
       <NuxtImg :src="character.image || DEFAULT_AVATAR" alt="Character avatar"
         class="w-24 h-24 mr-8 rounded-lg object-cover" />
