@@ -44,6 +44,7 @@
     "@typescript-eslint/utils": "^8.6.0"
   },
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "netlify-cli": "^18.0.3"
   }
 }

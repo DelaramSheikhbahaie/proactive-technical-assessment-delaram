@@ -6,13 +6,13 @@ command = "pnpm run build"
 NODE_VERSION = "20"
 
 [[redirects]]
-  from = "/api/__api_party/rickAndMorty/*"
+  from = "/api/__api_party/rickAndMorty/:splat"
   to = "https://rickandmortyapi.com/api/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/api/__api_party/pokemon/*"
+  from = "/api/__api_party/pokemon/:splat"
   to = "https://pokeapi.co/api/v2/:splat"
   status = 200
   force = true
