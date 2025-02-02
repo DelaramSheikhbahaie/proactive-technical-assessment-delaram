@@ -9,33 +9,15 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
+  
 [[redirects]]
-  from = "/api/__api_party/rickAndMorty/:splat"
+  from = "/api/__api_party/rickAndMorty/*"
   to = "https://rickandmortyapi.com/api/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/api/__api_party/pokemon/:splat"
+  from = "/api/__api_party/pokemon/*"
   to = "https://pokeapi.co/api/v2/:splat"
   status = 200
   force = true
-
-# Prevent Netlify from wrapping images with .netlify/images/
-[[redirects]]
-  from = "/.netlify/images/*"
-  to = "/images/:splat"
-  status = 404
-  force = true
-
-# Ensure no optimization for external URLs
-[[headers]]
-  for = "/api/__api_party/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/api/pokemon/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
