@@ -6,9 +6,9 @@ const PAGES = [
 </script>
 <template>
   <h1 class="text-xl mb-8">Choose your adventure!</h1>
-  <div class="flex flex-row justify-start">
+  <div class="flex flex-row justify-start max-sm:flex-col">
     <NuxtLink v-for="page in PAGES" :key="page.to" :to="page.to">
-      <UButton color="pink" variant="solid" class="py-4 px-8 mr-4">{{ page.label }}</UButton>
+      <UButton color="pink" variant="solid" class="py-4 px-8 mr-4 max-sm:my-2">{{ page.label }}</UButton>
     </NuxtLink>
   </div>
 </template>

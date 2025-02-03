@@ -15,9 +15,9 @@ const displayOptions = [
 </script>
 
 <template>
-    <div class="flex flex-row justify-between items-center w-full p-4">
-        <h1 class="text-xl font-bold">{{ title }}</h1>
-        <div class="w-2/5 flex flex-row justify-end items-center">
+    <div class="flex flex-row justify-between items-center w-full p-4 max-sm:flex-col max-sm:items-start">
+        <h1 class="text-xl font-bold max-sm:mb-4">{{ title }}</h1>
+        <div class="w-2/5 flex flex-row justify-end items-center max-sm:justify-start">
             <h3 class="mr-8">Display: </h3>
             <UButton v-for="option in displayOptions" :key="option.type"
                 @click="overViewStore.changeDisplay(option.type)" :icon="option.icon" color="pink" variant="solid"
