@@ -26,8 +26,8 @@ onMounted(() => {
   </div>
   <div v-else-if="characterDetails">
     <h1 class="text-4xl font-bold mb-8">{{ characterDetails.name }}</h1>
+    <NuxtImg :src="characterDetails.image" class="w-[230px] mb-8 rounded-xl" alt="Character Image" />
     <div class="flex flex-row justify-start">
-      <NuxtImg :src="characterDetails.image" class="w-[230px] mr-16 rounded-xl" alt="Character Image" />
       <div class="flex flex-col gap-10">
         <p class="text-xl">Status: <strong>{{ characterDetails.status }}</strong></p>
         <p class="text-xl">Gender: <strong>{{ characterDetails.gender }}</strong></p>
