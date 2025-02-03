@@ -5,7 +5,20 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Redirect all requests to index.html for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
+  status = 200
+
+# Cache headers for better performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Serve fallback 404.html for unmatched routes (Nuxt SPA requirement)
+[[redirects]]
+  from = "/404"
+  to = "/"
   status = 200
