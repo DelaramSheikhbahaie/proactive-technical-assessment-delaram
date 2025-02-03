@@ -31,7 +31,7 @@ export default defineNuxtConfig({
       crawlLinks: false,
       routes: ['/', '/assignment'],
     },
-    preset: 'netlify',
+    preset: 'static',
   },
 
   app: {
