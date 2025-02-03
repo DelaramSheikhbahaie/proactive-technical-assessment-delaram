@@ -31,6 +31,9 @@ export default defineNuxtConfig({
       crawlLinks: false,
       routes: ['/', '/assignment'],
     },
+    output: {
+      publicDir: './dist',
+    },
   },
 
   app: {
