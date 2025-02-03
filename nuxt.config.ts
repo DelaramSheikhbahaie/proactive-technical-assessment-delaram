@@ -30,7 +30,10 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: false,
       routes: ['/', '/assignment'],
-    }
+    },
+    output: {
+      publicDir: './dist',
+    },
   },
 
   app: {
