@@ -56,10 +56,9 @@ export default defineNuxtConfig({
   pwa,
 
   image: {
-    provider: 'netlify',
-    domains: ['images.example.com']
+    domains: ['rickandmortyapi.com']
   },
-  
+
   devtools: {
     enabled: true,
   },
